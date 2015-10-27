@@ -33,8 +33,22 @@ namespace RPN
                 Operation o = OperationBuilder.Build(stack, mode, type);
                 if (o != null)
                     o.Execute();
-
+                return;
             }
+
+            if (parameter.ToString().Equals("."))
+            {
+                Console.WriteLine("KROPKA!");
+                return;
+            }
+
+            int? number = int.Parse(parameter.ToString());
+            if (number != null)
+            {
+                Console.WriteLine("wcisnieto liczbe: " + number);
+                return;
+            }
+   
         }
 
         public void RaiseCanExecuteChanged()
