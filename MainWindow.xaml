@@ -15,17 +15,36 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="150"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" Background="Yellow" HorizontalAlignment="Stretch">
         </Grid>
-        <Grid Grid.Row="1"  Grid.Column="2" Background="Red" HorizontalAlignment="Stretch"/>
+        <Grid Grid.Row="1"  Grid.Column="2" Background="Red" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Content="L4" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Label Content="L3" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Label Content="L2" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Label Content="L1" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding L4, Mode=OneWay}" Grid.Column="1" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Right" VerticalContentAlignment="Center" IsReadOnly="True"/>
+            <TextBox Text="{Binding L3, Mode=OneWay}" Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Right" VerticalContentAlignment="Center" IsReadOnly="True"/>
+            <TextBox Text="{Binding L2, Mode=OneWay}" Grid.Column="1" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Right" VerticalContentAlignment="Center" IsReadOnly="True" />
+            <TextBox Text="{Binding L1, Mode=OneWay}" Grid.Column="1" Grid.Row="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Right" VerticalContentAlignment="Center" IsReadOnly="True"/>
+        </Grid>
         <Grid Grid.Row="2"  Grid.Column="2" Background="blue" HorizontalAlignment="Stretch">
-            <RadioButton IsChecked="{Binding CalculationMode,ConverterParameter=Number,Converter={StaticResource enumBooleanConverter}}">Number</RadioButton>
-            <RadioButton IsChecked="{Binding CalculationMode,ConverterParameter=Date,Converter={StaticResource enumBooleanConverter}}" Margin="114,0,-113.4,0.4">Date</RadioButton>
-            <RadioButton IsChecked="{Binding CalculationMode,ConverterParameter=Time,Converter={StaticResource enumBooleanConverter}}" Margin="0,17,-0.4,-17.6">Time</RadioButton>
+            <RadioButton HorizontalAlignment="Left" VerticalAlignment="Center" IsChecked="{Binding CalculationMode,ConverterParameter=Number,Converter={StaticResource enumBooleanConverter}}">Number</RadioButton>
+            <RadioButton HorizontalAlignment="Center" VerticalAlignment="Center"  IsChecked="{Binding CalculationMode,ConverterParameter=Date,Converter={StaticResource enumBooleanConverter}}">Date</RadioButton>
+            <RadioButton HorizontalAlignment="Right" VerticalAlignment="Center" IsChecked="{Binding CalculationMode,ConverterParameter=Time,Converter={StaticResource enumBooleanConverter}}">Time</RadioButton>
         </Grid>
         <Grid Grid.Row="3"  Grid.Column="2" Background="Green">
             <Grid.ColumnDefinitions>
@@ -58,7 +77,7 @@
             <Button Content="0" Grid.Column="1" Grid.Row="5" CommandParameter="0" Command="{Binding Calculate}"/>
 
             <Button Content="POP" Grid.Column="2" Grid.Row="0" CommandParameter="{x:Static local:OperationType.POP}" Command="{Binding Calculate}"/>
-            <Button Content="1/X" Grid.Column="2" Grid.Row="1" CommandParameter="{x:Static local:OperationType.INV_X}" Command="{Binding Calculate}"/> 
+            <Button Content="1/X" Grid.Column="2" Grid.Row="1" CommandParameter="{x:Static local:OperationType.INV_X}" Command="{Binding Calculate}"/>
             <Button Content="8" Grid.Column="2" Grid.Row="2" CommandParameter="8" Command="{Binding Calculate}"/>
             <Button Content="5" Grid.Column="2" Grid.Row="3" CommandParameter="5" Command="{Binding Calculate}"/>
             <Button Content="2" Grid.Column="2" Grid.Row="4" CommandParameter="2" Command="{Binding Calculate}"/>
@@ -84,6 +103,6 @@
             <MenuItem Header="_Window" />
             <MenuItem Header="_Help" />
         </Menu>
-        <StatusBar Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="-10,220.8,9.6,10" Grid.RowSpan="2"/>
+        <StatusBar Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2"  Grid.RowSpan="2"/>
     </Grid>
 </Window>

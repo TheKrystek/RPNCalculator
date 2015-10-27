@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,32 +25,41 @@ namespace RPN
 
         public event EventHandler CanExecuteChanged;
 
+        /// <summary>
+        /// Wszystkie przyciski obsługiwane są za pomocą tego samego handlera, tylko z różnymi prametrami
+        /// w zależności od typu i wartości paramteru wykonywane będą inne operacje
+        /// </summary>
+        /// <param name="parameter"></param>
         public void Execute(object parameter)
         {
-            Console.WriteLine(mode + "->" + parameter);
+            handleCommands(parameter);
+            handleComma(parameter);
+            handleNumbers(parameter);  
+        }
+
+        private void handleNumbers(object parameter){
+            int number = 0;
+            if (int.TryParse(parameter.ToString(), out number))
+                stack.Append(number);
+        }
+
+        private void handleComma(object parameter)
+        {
+            if(parameter.ToString().Equals("."))
+                stack.SetComma();
+        }
+
+       private void handleCommands(object parameter)
+        {
             if (parameter is OperationType)
             {
                 OperationType type = (OperationType)parameter;
                 Operation o = OperationBuilder.Build(stack, mode, type);
                 if (o != null)
                     o.Execute();
-                return;
             }
-
-            if (parameter.ToString().Equals("."))
-            {
-                Console.WriteLine("KROPKA!");
-                return;
-            }
-
-            int? number = int.Parse(parameter.ToString());
-            if (number != null)
-            {
-                Console.WriteLine("wcisnieto liczbe: " + number);
-                return;
-            }
-   
         }
+
 
         public void RaiseCanExecuteChanged()
         {
@@ -59,5 +69,6 @@ namespace RPN
                 handler(this, EventArgs.Empty);
             }
         }
+
     }
 }

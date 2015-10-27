@@ -25,7 +25,23 @@ namespace RPN
                 return (double)(input / Math.Pow(10, digitsAfterZero));
             }
         }
-    
+
+
+        public string Text
+        {
+            get
+            {
+                if (digitsAfterZero > 0 && hasComma)
+                    return string.Format(string.Format("{{0:F{0}}}", digitsAfterZero), Value);
+                if (hasComma)
+                    return string.Format("{0},",Value);
+                return Value.ToString();
+            }
+
+        }
+
+
+
         /// <summary>
         /// Dodaj cyfrę na sam koniec
         /// </summary>

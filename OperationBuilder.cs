@@ -10,6 +10,18 @@ namespace RPN
     {
         public static Operation Build(CalculationStack stack, CalculationMode mode, OperationType type)
         {
+            // zacznij od sprawdzania operacji ktore sa niezalezne od trybu
+            switch (type)
+            {
+                case OperationType.C:
+                        return new Erase(stack);
+                case OperationType.AC:
+                        return new Clear(stack);
+            }
+
+
+
+
             if (mode == CalculationMode.Date) { 
                      
             }
@@ -31,8 +43,6 @@ namespace RPN
                     case OperationType.Mplus:
                         break;
                     case OperationType.SQRT:
-                        break;
-                    case OperationType.C:
                         break;
                     case OperationType.POW:
                         break;
