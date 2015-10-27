@@ -61,6 +61,7 @@
     </ApplicationDefinition>
     <Compile Include="EnumBooleanConverter.cs" />
     <Compile Include="CalculateAction.cs" />
+    <Compile Include="Input.cs" />
     <Compile Include="ViewModelCalculator.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

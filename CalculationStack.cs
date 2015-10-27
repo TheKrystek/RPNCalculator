@@ -9,16 +9,11 @@ namespace RPN
     public class CalculationStack
     {
         private Stack<double> stack;
-        private long input = 0;
-        private int digitsAfterZero = 0;
+        private Input input; 
 
         public double Input
         {
-            get {
-                if (!hasComma)
-                    return (double)input;
-                return (double)(input / Math.Pow(10, digitsAfterZero));
-            }
+            get {return input.Value; }
         }
 
         private bool hasComma = false; 
@@ -26,6 +21,7 @@ namespace RPN
 
         public CalculationStack() {
             stack = new Stack<double>();
+            input = new Input();
         }
 
         public void Add(double value) {
@@ -39,31 +35,25 @@ namespace RPN
             return stack.Pop();
         }
 
-        public double AppendInput(int value) {
-            if (hasComma)
-                digitsAfterZero++;
-            input = input * 10 + value;
-            return input;
-        }
 
-        public bool setComma()
+        public void Append(int p)
         {
-            if (hasComma)
-                return false;
-            return hasComma = true;
+            input.Add(p);
         }
 
-
-        public void RemoveInput()
+        public void setComma()
         {
-            if (hasComma && digitsAfterZero == 0) { 
-                hasComma = false;
-                return;
-            }
-            if (digitsAfterZero > 0)
-                digitsAfterZero--;
-            input /= 10;
+            input.SetComma();
         }
 
+        public void Erase()
+        {
+            input.Erase();
+        }
+
+        public void Clear()
+        {
+            input.Clear();
+        }
     }
 }
