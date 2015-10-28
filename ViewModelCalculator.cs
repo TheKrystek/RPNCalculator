@@ -39,9 +39,11 @@ namespace RPN
         #endregion
 
         public string L1 { get { return calculationStack.Input.ToString(); } }
-        public string L2 { get { return calculationStack.L2.ToString(); } }
-        public string L3 { get { return calculationStack.L3.ToString(); } }
-        public string L4 { get { return calculationStack.L4.ToString(); } }
+        public double L2 { get { return calculationStack.L2; } }
+        public double L3 { get { return calculationStack.L3; } }
+        public double L4 { get { return calculationStack.L4; } }
+        public double Memory { get { return calculationStack.Memory; } }
+
 
         public CalculationMode CalculationMode
         {

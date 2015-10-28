@@ -59,10 +59,13 @@
     <Compile Include="EnumBooleanConverter.cs" />
     <Compile Include="CalculateAction.cs" />
     <Compile Include="Input.cs" />
-    <Compile Include="Number.cs" />
     <Compile Include="Operations\ChangeSign.cs" />
+    <Compile Include="Operations\MemoryRecall.cs" />
+    <Compile Include="Operations\MemoryMinus.cs" />
+    <Compile Include="Operations\MemoryPlus.cs" />
     <Compile Include="Operations\MulNumber.cs" />
     <Compile Include="Operations\DivNumber.cs" />
+    <Compile Include="Operations\MemoryClear.cs" />
     <Compile Include="Operations\SubNumber.cs" />
     <Compile Include="Operations\Clear.cs" />
     <Compile Include="Operations\Swap.cs" />

@@ -16,9 +16,16 @@ namespace RPN
     {
 
         #region Pola
-            private List<Number> stack;
+            private List<double> stack;
             private Input input;
             private bool pushed = false;
+            private double memory = 0;
+
+            public double Memory
+            {
+                get { return memory; }
+                set { memory = value; }
+            }
         #endregion
 
         #region Properties
@@ -52,9 +59,9 @@ namespace RPN
             /// <summary>
             /// Zwraca 3 pierwsze poziomy ze stosu
             /// </summary>
-            public Number L2 { get { return Get(0); } }
-            public Number L3 { get { return Get(1); } }
-            public Number L4 { get { return Get(2); } }
+            public double L2 { get { return Get(0); } }
+            public double L3 { get { return Get(1); } }
+            public double L4 { get { return Get(2); } }
         #endregion
 
         #region Metody publiczne
@@ -63,7 +70,7 @@ namespace RPN
             /// </summary>
             public CalculationStack()
             {
-                stack = new List<Number>();
+                stack = new List<double>();
                 input = new Input();
             }
 
@@ -71,7 +78,7 @@ namespace RPN
             /// Wstaw podaną wartość na stos
             /// </summary>
             /// <param name="value"></param>
-            public void Push(Number value)
+            public void Push(double value)
             {
                 stack.Add(value);
                 pushed = true;
@@ -92,7 +99,7 @@ namespace RPN
             /// </summary>
             /// <param name="index"></param>
             /// <returns></returns>
-            public Number Get(int index = -1)
+            public double Get(int index = -1)
             {
                 if (index < 0)
                     index = this.index;
@@ -101,7 +108,7 @@ namespace RPN
 
                 if (index >= 0 && index < stack.Count)
                     return stack[index];
-                return new Number();
+                return 0;
             }
 
             /// <summary>
@@ -110,7 +117,7 @@ namespace RPN
             /// </summary>
             /// <param name="index"></param>
             /// <returns></returns>
-            public void Set(Number value, int index = -1)
+            public void Set(double value, int index = -1)
             {
                 if (index < 0)
                     index = this.index;
@@ -131,10 +138,10 @@ namespace RPN
             /// Ściąga wartość ze stosu i wstawia do buforu wejściowego
             /// </summary>
             /// <returns>Aktualną wartość buforu wejściowego</returns>
-            public Number Pop()
+            public double Pop()
             {
                 if (index < 0)
-                    return new Number();
+                    return 0;
                 input.Value = stack[index];
                 stack.RemoveAt(index);
                 NotifyPropertyChanged();
@@ -182,7 +189,7 @@ namespace RPN
                 NotifyPropertyChanged();
             }
 
-            public void SetInput(Number value)
+            public void SetInput(double value)
             {
                 input.Value = value;
                 NotifyPropertyChanged();

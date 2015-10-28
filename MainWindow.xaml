@@ -103,6 +103,8 @@
             <MenuItem Header="_Window" />
             <MenuItem Header="_Help" />
         </Menu>
-        <StatusBar Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2"  Grid.RowSpan="2"/>
+        <StatusBar Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2"  Grid.RowSpan="2">
+            <Label Content="{Binding Memory}"/>
+        </StatusBar>
     </Grid>
 </Window>

@@ -13,12 +13,11 @@ namespace RPN
         {
         }
 
-        public override bool Execute()
+        public override void Execute()
         {
-            Number tmpImput = stack.Input.Value;
+            double tmpImput = stack.Input.Value;
             stack.Input.Value = stack.L2;
             stack.Set(tmpImput);
-            return true;
         }
     }
 }

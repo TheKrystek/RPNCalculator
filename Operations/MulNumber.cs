@@ -12,10 +12,9 @@ namespace RPN
             : base(calculationStack)
         {}
 
-        public override bool Execute()
+        public override void Execute()
         {
             stack.SetInput(stack.Input.Value * stack.Pop());
-            return true;
         }
     }
 }

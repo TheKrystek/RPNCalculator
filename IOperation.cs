@@ -8,6 +8,6 @@ namespace RPN
 {
     public interface IOperation
     {
-        bool Execute();
+        void Execute();
     }
 }

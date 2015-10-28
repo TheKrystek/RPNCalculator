@@ -13,6 +13,6 @@ namespace RPN
             this.stack = stack;
         }
 
-        public abstract bool Execute();
+        public abstract void Execute();
     }
 }

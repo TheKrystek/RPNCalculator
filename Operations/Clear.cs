@@ -13,10 +13,9 @@ namespace RPN
         {
         }
 
-        public override bool Execute()
+       public override void Execute()
         {
             stack.Clear();
-            return true;
         }
     }
 }

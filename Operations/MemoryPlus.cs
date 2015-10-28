@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace RPN
 {
-   public class Enter : Operation
+    public class MemoryPlus : Operation
     {
-       public Enter(CalculationStack calculationStack)
+        public MemoryPlus(CalculationStack calculationStack)
             : base(calculationStack)
         {
         }
 
-       public override void Execute()
+        public override void Execute()
         {
-            stack.PushInput();
+            stack.Memory += stack.Input.Value;
         }
     }
 }

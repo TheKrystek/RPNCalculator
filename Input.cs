@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,21 +9,30 @@ namespace RPN
 {
     public class Input
     {
-        private Number input;
+        private double value;
+        private string text;
+        private bool isDouble;
 
         public Input() {
             Clear();
         }
 
 
-        public Number Value
+        public double Value
         {
             get
             {
-                return input;
+                if (string.IsNullOrEmpty(text))
+                    return 0;
+
+                if (text[text.Length - 1] == ',')
+                   Erase();
+
+                return double.Parse(text);
             }
             set {
-                input = value;
+                this.value = value;
+                this.text = this.value.ToString();
             } 
         }
 
@@ -32,15 +42,11 @@ namespace RPN
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public Number Add(int value)
+        public void Add(int value)
         {
-            if (input.HasComma)
-                input.Precision++;
-            else
-                input.Value *= 10;
-
-            input.Value += value;
-            return input;
+            if (text == "0")
+                text = "";
+            text += value.ToString();
         }
 
         /// <summary>
@@ -48,14 +54,13 @@ namespace RPN
         /// </summary>
         public void Erase()
         {
-            if (input.HasComma && input.Precision == 0)
-            {
-                input.HasComma = false;
+            if (string.IsNullOrEmpty(text))
                 return;
-            }
-            if (input.Precision > 0)
-                input.Precision--;
-            input.Value /= 10;
+
+            if (text[text.Length - 1] == ',')
+                isDouble = false;
+
+            text = text.Substring(0,text.Length - 1);
         }
 
         /// <summary>
@@ -63,8 +68,9 @@ namespace RPN
         /// </summary>
         public void Clear()
         {
-            input = new Number();
-            input.HasComma = false;
+            value = 0;
+            text = "0";
+            isDouble = false;
         }
 
         /// <summary>
@@ -73,15 +79,15 @@ namespace RPN
         /// <returns></returns>
         public bool SetComma()
         {
-            Console.WriteLine(input.Precision);
-            if (input.HasComma)
+            if (isDouble)
                 return false;
-            return input.HasComma = true;
+            text += ",";
+            return isDouble = true;
         }
 
         public override string ToString()
         {
-            return input.ToString();
+            return text;
         }
 
     }
