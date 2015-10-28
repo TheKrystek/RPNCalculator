@@ -10,14 +10,11 @@ namespace RPN
     {
         public AddNumber(CalculationStack calculationStack)
             : base(calculationStack)
-        {
-
-            Console.WriteLine("wykonano konstruktor");
-        }
+        {}
 
         public override bool Execute()
         {
-            Console.WriteLine("ExampleTimeCommand.CalculateTime()");
+            stack.SetInput(stack.Input.Value + stack.Pop());
             return true;
         }
     }

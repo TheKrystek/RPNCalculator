@@ -8,51 +8,23 @@ namespace RPN
 {
     public class Input
     {
-        private long input;
-        private int digitsAfterZero;
-        private bool hasComma;
+        private Number input;
 
         public Input() {
             Clear();
         }
 
 
-        public double Value
+        public Number Value
         {
             get
             {
-                if (!hasComma)
-                    return (double)input;
-                return (double)(input / Math.Pow(10, digitsAfterZero));
+                return input;
             }
             set {
-
-                decimal z = (decimal)value % 1;
-                int digits = BitConverter.GetBytes(decimal.GetBits(z)[3])[2];
-
-                if (digits > 0) {
-                    hasComma = true;
-                    digitsAfterZero = digits;
-                    input = (int)(value * Math.Pow(10,digits)); 
-                }
-                else
-                    input = (int)value;
+                input = value;
             } 
         }
-
-
-        public string Text
-        {
-            get
-            {
-                if (digitsAfterZero > 0 && hasComma)
-                    return string.Format(string.Format("{{0:F{0}}}", digitsAfterZero), Value);
-                if (hasComma)
-                    return string.Format("{0},",Value);
-                return Value.ToString();
-            }
-        }
-
 
 
         /// <summary>
@@ -60,11 +32,14 @@ namespace RPN
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public double Add(int value)
+        public Number Add(int value)
         {
-            if (hasComma)
-                digitsAfterZero++;
-            input = input * 10 + value;
+            if (input.HasComma)
+                input.Precision++;
+            else
+                input.Value *= 10;
+
+            input.Value += value;
             return input;
         }
 
@@ -73,14 +48,14 @@ namespace RPN
         /// </summary>
         public void Erase()
         {
-            if (hasComma && digitsAfterZero == 0)
+            if (input.HasComma && input.Precision == 0)
             {
-                hasComma = false;
+                input.HasComma = false;
                 return;
             }
-            if (digitsAfterZero > 0)
-                digitsAfterZero--;
-            input /= 10;
+            if (input.Precision > 0)
+                input.Precision--;
+            input.Value /= 10;
         }
 
         /// <summary>
@@ -88,11 +63,9 @@ namespace RPN
         /// </summary>
         public void Clear()
         {
-            input = 0;
-            hasComma = false;
-            digitsAfterZero = 0;
+            input = new Number();
+            input.HasComma = false;
         }
-
 
         /// <summary>
         /// Postaw przecinek
@@ -100,15 +73,15 @@ namespace RPN
         /// <returns></returns>
         public bool SetComma()
         {
-            if (hasComma)
+            Console.WriteLine(input.Precision);
+            if (input.HasComma)
                 return false;
-            return hasComma = true;
+            return input.HasComma = true;
         }
-
 
         public override string ToString()
         {
-            return Text;
+            return input.ToString();
         }
 
     }

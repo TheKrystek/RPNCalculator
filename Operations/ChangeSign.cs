@@ -6,18 +6,16 @@ using System.Threading.Tasks;
 
 namespace RPN
 {
-    public class Swap : Operation
+   public class ChangeSign : Operation
     {
-        public Swap(CalculationStack calculationStack)
+       public ChangeSign(CalculationStack calculationStack)
             : base(calculationStack)
-        {
-        }
+        {}
 
         public override bool Execute()
         {
-            Number tmpImput = stack.Input.Value;
-            stack.Input.Value = stack.L2;
-            stack.Set(tmpImput);
+            stack.Input.Value.Value *= -1;
+            stack.SetInput(stack.Input.Value);
             return true;
         }
     }

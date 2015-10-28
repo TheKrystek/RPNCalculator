@@ -16,7 +16,7 @@ namespace RPN
     {
 
         #region Pola
-            private List<double> stack;
+            private List<Number> stack;
             private Input input;
             private bool pushed = false;
         #endregion
@@ -35,6 +35,12 @@ namespace RPN
                 }
             }
 
+            public bool Pushed
+            {
+                get { return pushed; }
+                set { pushed = value; }
+            }
+
             /// <summary>
             /// Udostępnia bufor do którego wczytywane są dane z klawiatury
             /// </summary>
@@ -46,9 +52,9 @@ namespace RPN
             /// <summary>
             /// Zwraca 3 pierwsze poziomy ze stosu
             /// </summary>
-            public double L2 { get { return getLevel(0); } }
-            public double L3 { get { return getLevel(1); } }
-            public double L4 { get { return getLevel(2); } }
+            public Number L2 { get { return Get(0); } }
+            public Number L3 { get { return Get(1); } }
+            public Number L4 { get { return Get(2); } }
         #endregion
 
         #region Metody publiczne
@@ -57,7 +63,7 @@ namespace RPN
             /// </summary>
             public CalculationStack()
             {
-                stack = new List<double>();
+                stack = new List<Number>();
                 input = new Input();
             }
 
@@ -65,11 +71,11 @@ namespace RPN
             /// Wstaw podaną wartość na stos
             /// </summary>
             /// <param name="value"></param>
-            public void Push(double value)
+            public void Push(Number value)
             {
                 stack.Add(value);
                 pushed = true;
-                OnPropertyChanged();
+                NotifyPropertyChanged();
             }
 
             /// <summary>
@@ -81,32 +87,57 @@ namespace RPN
             }
 
             /// <summary>
-            /// Pobiera itą wartość ze stosu
+            /// Pobiera itą wartość ze stosu licząc od końca listy
             /// Domyślnie pobiera ostatni element
             /// </summary>
             /// <param name="index"></param>
             /// <returns></returns>
-            public double Get(int index = -1)
+            public Number Get(int index = -1)
             {
-                if (index == -1)
-                    index = this.index;
-
                 if (index < 0)
-                    return 0;
-                return stack[index];
+                    index = this.index;
+                else
+                    index = this.index - index;
+
+                if (index >= 0 && index < stack.Count)
+                    return stack[index];
+                return new Number();
             }
+
+            /// <summary>
+            /// Ustawia wartość itej pozycji na stosie, jeżeli element stosu nie istnieje do dodaj
+            /// Domyślnie ustawia ostatni element
+            /// </summary>
+            /// <param name="index"></param>
+            /// <returns></returns>
+            public void Set(Number value, int index = -1)
+            {
+                if (index < 0)
+                    index = this.index;
+                else
+                    index = this.index - index;
+
+                if (index >= 0 && index < stack.Count)
+                    stack[index] = value;
+
+                if (index == -1)
+                    Push(value);
+
+                NotifyPropertyChanged();
+            }
+
 
             /// <summary>
             /// Ściąga wartość ze stosu i wstawia do buforu wejściowego
             /// </summary>
             /// <returns>Aktualną wartość buforu wejściowego</returns>
-            public double Pop()
+            public Number Pop()
             {
                 if (index < 0)
-                    return 0;
+                    return new Number();
                 input.Value = stack[index];
                 stack.RemoveAt(index);
-                OnPropertyChanged();
+                NotifyPropertyChanged();
                 return input.Value;
             }
             
@@ -121,7 +152,7 @@ namespace RPN
 
                 input.Add(p);
                 pushed = false;
-                OnPropertyChanged();
+                NotifyPropertyChanged();
             }
 
             /// <summary>
@@ -130,7 +161,7 @@ namespace RPN
             public void SetComma()
             {
                 input.SetComma();
-                OnPropertyChanged();
+                NotifyPropertyChanged();
             }
 
             /// <summary>
@@ -139,7 +170,7 @@ namespace RPN
             public void Erase()
             {
                 input.Erase();
-                OnPropertyChanged();
+                NotifyPropertyChanged();
             }
 
             /// <summary>
@@ -148,21 +179,28 @@ namespace RPN
             public void Clear()
             {
                 input.Clear();
-                OnPropertyChanged();
+                NotifyPropertyChanged();
+            }
+
+            public void SetInput(Number value)
+            {
+                input.Value = value;
+                NotifyPropertyChanged();
+            }
+
+            public override string ToString()
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("Stack:");
+                foreach (var item in stack)
+                    sb.AppendLine(item.ToString());
+                return sb.ToString();
             }
         #endregion
 
         #region Metody prywatne i chronione
-            private double getLevel(int p)
-            {
-                p = index - p;
-                if (p >= 0 && p < stack.Count)
-                    return stack[p];
-                return 0;
-            }
 
-
-            protected void OnPropertyChanged(string name = "")
+            protected void NotifyPropertyChanged(string name = "")
             {
                 PropertyChangedEventHandler handler = PropertyChanged;
                 if (handler != null)

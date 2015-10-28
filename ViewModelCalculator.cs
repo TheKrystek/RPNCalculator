@@ -39,9 +39,9 @@ namespace RPN
         #endregion
 
         public string L1 { get { return calculationStack.Input.ToString(); } }
-        public double L2 { get { return calculationStack.L2; } }
-        public double L3 { get { return calculationStack.L3; } }
-        public double L4 { get { return calculationStack.L4; } }
+        public string L2 { get { return calculationStack.L2.ToString(); } }
+        public string L3 { get { return calculationStack.L3.ToString(); } }
+        public string L4 { get { return calculationStack.L4.ToString(); } }
 
         public CalculationMode CalculationMode
         {
@@ -49,7 +49,6 @@ namespace RPN
             set
             {
                 calculationMode = value;
-                Console.WriteLine("ustawiono " + value);
             }
         }
         #endregion

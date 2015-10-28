@@ -61,15 +61,17 @@ namespace RPN
                     case OperationType.SWAP:
                         break;
                     case OperationType.PLUS_MINUS:
-                        break;
+                        return new ChangeSign(stack);
                     case OperationType.PERCENT:
                         break;
                     case OperationType.DIV:
+                        return new DivNumber(stack);
                         break;
                     case OperationType.MUL:
+                        return new MulNumber(stack);
                         break;
                     case OperationType.SUB:
-                        break;
+                        return new SubNumber(stack);
                     case OperationType.ADD:
                         return new AddNumber(stack);
                     case OperationType.ENTER:

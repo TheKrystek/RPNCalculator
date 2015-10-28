@@ -6,18 +6,15 @@ using System.Threading.Tasks;
 
 namespace RPN
 {
-    public class Swap : Operation
+   public class MulNumber : Operation
     {
-        public Swap(CalculationStack calculationStack)
+       public MulNumber(CalculationStack calculationStack)
             : base(calculationStack)
-        {
-        }
+        {}
 
         public override bool Execute()
         {
-            Number tmpImput = stack.Input.Value;
-            stack.Input.Value = stack.L2;
-            stack.Set(tmpImput);
+            stack.SetInput(stack.Input.Value * stack.Pop());
             return true;
         }
     }
