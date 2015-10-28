@@ -21,6 +21,8 @@ namespace RPN
                         return new Enter(stack);
                 case OperationType.POP:
                         return new Pop(stack);
+                case OperationType.SWAP:
+                        return new Swap(stack);
             }
 
 

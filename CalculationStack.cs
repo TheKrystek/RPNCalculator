@@ -102,6 +102,8 @@ namespace RPN
             /// <returns>Aktualną wartość buforu wejściowego</returns>
             public double Pop()
             {
+                if (index < 0)
+                    return 0;
                 input.Value = stack[index];
                 stack.RemoveAt(index);
                 OnPropertyChanged();

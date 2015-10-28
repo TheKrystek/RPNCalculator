@@ -60,6 +60,7 @@
     <Compile Include="CalculateAction.cs" />
     <Compile Include="Input.cs" />
     <Compile Include="Operations\Clear.cs" />
+    <Compile Include="Operations\Swap.cs" />
     <Compile Include="Operations\Pop.cs" />
     <Compile Include="Operations\Enter.cs" />
     <Compile Include="Operations\Erase.cs" />
