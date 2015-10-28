@@ -16,6 +16,7 @@ namespace RPN
         public override void Execute()
         {
             stack.Memory = 0;
+            stack.RefreshMemory();
         }
     }
 }

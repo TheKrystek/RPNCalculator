@@ -23,6 +23,14 @@ namespace RPN
                         return new Pop(stack);
                 case OperationType.SWAP:
                         return new Swap(stack);
+                case OperationType.MC:
+                        return new MemoryClear(stack);
+                case OperationType.MR:
+                        return new MemoryRecall(stack);
+                case OperationType.Mplus:
+                        return new MemoryPlus(stack);
+                case OperationType.Mminus:
+                        return new MemoryMinus(stack);
             }
 
 

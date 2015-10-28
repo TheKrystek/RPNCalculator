@@ -13,7 +13,7 @@ namespace RPN
         {
         }
 
-       public override void Execute()
+        public override void Execute()
         {
             stack.Memory -= stack.Input.Value;
         }
