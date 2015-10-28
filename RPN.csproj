@@ -66,6 +66,10 @@
     <Compile Include="Operations\MulNumber.cs" />
     <Compile Include="Operations\DivNumber.cs" />
     <Compile Include="Operations\MemoryClear.cs" />
+    <Compile Include="Operations\InvertNumber.cs" />
+    <Compile Include="Operations\PercentNumber.cs" />
+    <Compile Include="Operations\SqrtNumber.cs" />
+    <Compile Include="Operations\PowerNumber.cs" />
     <Compile Include="Operations\SubNumber.cs" />
     <Compile Include="Operations\Clear.cs" />
     <Compile Include="Operations\Swap.cs" />

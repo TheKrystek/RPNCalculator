@@ -48,42 +48,24 @@ namespace RPN
             if (mode == CalculationMode.Number) {
                 switch (type)
                 {
-                    case OperationType.MC:
-                        break;
-                    case OperationType.MR:
-                        break;
-                    case OperationType.Mminus:
-                        break;
-                    case OperationType.Mplus:
-                        break;
                     case OperationType.SQRT:
-                        break;
+                        return new SqrtNumber(stack);
                     case OperationType.POW:
-                        break;
-                    case OperationType.AC:
-                        break;
-                    case OperationType.POP:
-                        break;
+                        return new PowerNumber(stack);
                     case OperationType.INV_X:
-                        break;
-                    case OperationType.SWAP:
-                        break;
+                        return new InvertNumber(stack);
                     case OperationType.PLUS_MINUS:
                         return new ChangeSign(stack);
                     case OperationType.PERCENT:
-                        break;
+                        return new PercentNumber(stack);
                     case OperationType.DIV:
                         return new DivNumber(stack);
-                        break;
                     case OperationType.MUL:
                         return new MulNumber(stack);
-                        break;
                     case OperationType.SUB:
                         return new SubNumber(stack);
                     case OperationType.ADD:
                         return new AddNumber(stack);
-                    case OperationType.ENTER:
-                        break;
                     default:
                         break;
                 }     
