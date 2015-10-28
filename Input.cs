@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RPN
 {
-    class Input
+    public class Input
     {
         private long input;
         private int digitsAfterZero;
@@ -16,6 +16,7 @@ namespace RPN
             Clear();
         }
 
+
         public double Value
         {
             get
@@ -24,6 +25,19 @@ namespace RPN
                     return (double)input;
                 return (double)(input / Math.Pow(10, digitsAfterZero));
             }
+            set {
+
+                decimal z = (decimal)value % 1;
+                int digits = BitConverter.GetBytes(decimal.GetBits(z)[3])[2];
+
+                if (digits > 0) {
+                    hasComma = true;
+                    digitsAfterZero = digits;
+                    input = (int)(value * Math.Pow(10,digits)); 
+                }
+                else
+                    input = (int)value;
+            } 
         }
 
 
@@ -37,7 +51,6 @@ namespace RPN
                     return string.Format("{0},",Value);
                 return Value.ToString();
             }
-
         }
 
 
@@ -90,6 +103,12 @@ namespace RPN
             if (hasComma)
                 return false;
             return hasComma = true;
+        }
+
+
+        public override string ToString()
+        {
+            return Text;
         }
 
     }

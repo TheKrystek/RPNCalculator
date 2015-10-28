@@ -15,7 +15,7 @@ namespace RPN.Tests
         {
             CalculationStack stack = new CalculationStack();
             stack.Append(1);
-            Assert.AreEqual(1, stack.Input);
+            Assert.AreEqual(1, stack.Input.Value);
         }
 
         [TestMethod()]
@@ -25,7 +25,7 @@ namespace RPN.Tests
             stack.Append(1);
             stack.Append(2);
             stack.Append(3);
-            Assert.AreEqual(123, stack.Input);
+            Assert.AreEqual(123, stack.Input.Value);
         }
 
         [TestMethod()]
@@ -37,7 +37,7 @@ namespace RPN.Tests
             stack.Append(1);
             stack.Append(2);
             stack.Append(3);
-            Assert.AreEqual(123, stack.Input);
+            Assert.AreEqual(123, stack.Input.Value);
         }
 
         [TestMethod()]
@@ -47,11 +47,11 @@ namespace RPN.Tests
             stack.Append(1);
             stack.Append(2);
             stack.Append(3);
-            stack.setComma();
+            stack.SetComma();
             stack.Append(0);
             stack.Append(5);
             stack.Append(1);
-            Assert.AreEqual(123.051, stack.Input);
+            Assert.AreEqual(123.051, stack.Input.Value);
         }
 
 
@@ -62,7 +62,7 @@ namespace RPN.Tests
             stack.Append(1);
             stack.Append(2);
             stack.Erase();
-            Assert.AreEqual(1, stack.Input);
+            Assert.AreEqual(1, stack.Input.Value);
         }
 
 
@@ -74,7 +74,7 @@ namespace RPN.Tests
             stack.Append(2);
             stack.Append(2);
             stack.Erase();
-            Assert.AreEqual(12, stack.Input);
+            Assert.AreEqual(12, stack.Input.Value);
         }
 
 
@@ -89,7 +89,7 @@ namespace RPN.Tests
             stack.Erase();
             stack.Erase();
             stack.Erase();
-            Assert.AreEqual(0, stack.Input);
+            Assert.AreEqual(0, stack.Input.Value);
         }
 
 
@@ -100,12 +100,12 @@ namespace RPN.Tests
             stack.Append(1);
             stack.Append(2);
             stack.Append(3);
-            stack.setComma();
+            stack.SetComma();
             stack.Append(0);
             stack.Append(5);
             stack.Append(1);
             stack.Erase();
-            Assert.AreEqual(123.05, stack.Input);
+            Assert.AreEqual(123.05, stack.Input.Value);
         }
 
         [TestMethod()]
@@ -113,7 +113,7 @@ namespace RPN.Tests
         {
             CalculationStack stack = new CalculationStack();
             stack.Append(3);
-            stack.setComma();
+            stack.SetComma();
             stack.Append(0);
             stack.Append(4);
             stack.Append(2);
@@ -127,7 +127,7 @@ namespace RPN.Tests
             stack.Append(1);
             stack.Append(5);
 
-            Assert.AreEqual(3.1415, stack.Input);
+            Assert.AreEqual(3.1415, stack.Input.Value);
         }
 
 

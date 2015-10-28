@@ -12,39 +12,42 @@ namespace RPN
         private List<double> stack;
         private Input input;
         private int index = -1; // wskaznik na ostatni element
+        private bool pushed = false;
 
-
-        public string Input
+        public Input Input
         {
-            get {return input.Text; }
+            get {return input; }
         }
 
-        public double L2 {get { return getLevel(2); }}
-        public double L3 { get { return getLevel(3); } }
-        public double L4 { get { return getLevel(4); } }
+        public double L2 {get { return getLevel(0); }}
+        public double L3 { get { return getLevel(1); } }
+        public double L4 { get { return getLevel(2); } }
 
         private double getLevel(int p)
         {
-            p--;
             p = index - p;
             if (p >= 0 && p < stack.Count)
                 return stack[p];
-            return p * input.Value;
+            return 0;
         }
-
-
-        private bool hasComma = false; 
-
 
         public CalculationStack() {
             stack = new List<double>();
             input = new Input();
         }
 
-        public void Add(double value) {        
+        public void Push(double value) {        
             stack.Add(value);
             index++;
+            pushed = true;
+            OnPropertyChanged();
         }
+
+        public void PushInput()
+        {
+            Push(input.Value);
+        }
+
 
         public double Get(int index = -1)
         {
@@ -56,10 +59,17 @@ namespace RPN
             return stack[index];
         }
 
+        public double Pop() {
+            return 0;
+        }
 
         public void Append(int p)
         {
+            if (pushed)
+                input.Clear();
+
             input.Add(p);
+            pushed = false;
             OnPropertyChanged();
         }
 

@@ -17,6 +17,8 @@ namespace RPN
                         return new Erase(stack);
                 case OperationType.AC:
                         return new Clear(stack);
+                case OperationType.ENTER:
+                        return new Enter(stack);
             }
 
 
