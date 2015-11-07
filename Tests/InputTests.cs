@@ -22,7 +22,7 @@ namespace RPN.Tests
         public void ValueSet_SetDouble()
         {
             Input input = new Input();
-            input.Value = new ;
+            input.Value = 3.1415;
             Assert.AreEqual(3.1415, input.Value);
         }
 
@@ -34,5 +34,8 @@ namespace RPN.Tests
             input.Add(7);
             Assert.AreEqual(3.14157, input.Value);
         }
+
+
+
     }
 }

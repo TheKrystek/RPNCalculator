@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -16,11 +17,20 @@ namespace RPN
     {
 
         #region Pola
-        private List<double> stack;
+        private ObservableCollection<double> stack;
         private Input input;
         private bool pushed = false;
         private double memory,prevMemory = 0;
+        private string message;
 
+        public string Message
+        {
+            get { return message; }
+            set { 
+                message = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public double Memory
         {
@@ -31,6 +41,12 @@ namespace RPN
                 memory = value;
                 NotifyPropertyChanged();
             }
+        }
+
+        public ObservableCollection<double> Items
+        {
+            get {        
+                return stack; }
         }
 
 
@@ -78,7 +94,7 @@ namespace RPN
         /// </summary>
         public CalculationStack()
         {
-            stack = new List<double>();
+            stack = new ObservableCollection<double>();
             input = new Input();
         }
 

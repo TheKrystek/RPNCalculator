@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPN", "RPN.csproj", "{40DF67BF-4C5B-468E-B04A-7761CFA3101A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{3ACA7F8B-4B3F-4DAC-BE01-772562D9A94B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPNTests", "Tests\RPNTests.csproj", "{3ACA7F8B-4B3F-4DAC-BE01-772562D9A94B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

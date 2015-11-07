@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3ACA7F8B-4B3F-4DAC-BE01-772562D9A94B}</ProjectGuid>
+    <ProjectGuid>{3622EF12-0621-4879-943D-C02FCEB59C3D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tests</RootNamespace>
-    <AssemblyName>Tests</AssemblyName>
+    <RootNamespace>RPNTests</RootNamespace>
+    <AssemblyName>RPNTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -50,14 +50,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="CalculationStackTests.cs" />
-    <Compile Include="InputTests.cs" />
-    <Compile Include="OperationBuilderTests.cs" />
+    <Compile Include="NumberToDateTimeConverterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RPN.csproj">
-      <Project>{40df67bf-4c5b-468e-b04a-7761cfa3101a}</Project>
+      <Project>{40DF67BF-4C5B-468E-B04A-7761CFA3101A}</Project>
       <Name>RPN</Name>
     </ProjectReference>
   </ItemGroup>

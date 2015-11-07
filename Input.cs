@@ -27,8 +27,15 @@ namespace RPN
 
                 if (text[text.Length - 1] == ',')
                    Erase();
+                try
+                {
+                    return double.Parse(text);
 
-                return double.Parse(text);
+                }
+                catch (Exception)
+                {
+                    return 0;
+                }
             }
             set {
                 this.value = value;

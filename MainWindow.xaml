@@ -4,7 +4,33 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="RPN.MainWindow"
     xmlns:local="clr-namespace:RPN"
     Title="MainWindow" Height="500" MinHeight="500" Width="400"  MinWidth="400" HorizontalAlignment="Stretch">
-    <Grid VerticalAlignment="Stretch"  HorizontalAlignment="Stretch" Background="Pink">
+    <Window.InputBindings>
+        <KeyBinding Key="NumPad0" CommandParameter="0" Command="{Binding Calculate}"/>
+        <KeyBinding Key="NumPad1" CommandParameter="1" Command="{Binding Calculate}"/>
+        <KeyBinding Key="NumPad2" CommandParameter="2" Command="{Binding Calculate}"/>
+        <KeyBinding Key="NumPad3" CommandParameter="3" Command="{Binding Calculate}"/>
+        <KeyBinding Key="NumPad4" CommandParameter="4" Command="{Binding Calculate}"/>
+        <KeyBinding Key="NumPad5" CommandParameter="5" Command="{Binding Calculate}"/>
+        <KeyBinding Key="NumPad6" CommandParameter="6" Command="{Binding Calculate}"/>
+        <KeyBinding Key="NumPad7" CommandParameter="7" Command="{Binding Calculate}"/>
+        <KeyBinding Key="NumPad8" CommandParameter="8" Command="{Binding Calculate}"/>
+        <KeyBinding Key="NumPad9" CommandParameter="9" Command="{Binding Calculate}"/>
+        <KeyBinding Key="Decimal" CommandParameter="." Command="{Binding Calculate}"/>
+
+        <KeyBinding Key="Back" CommandParameter="{x:Static local:OperationType.C}" Command="{Binding Calculate}"/>
+        <KeyBinding Key="Delete" CommandParameter="{x:Static local:OperationType.AC}" Command="{Binding Calculate}"/>
+        <KeyBinding Key="Down" CommandParameter="{x:Static local:OperationType.POP}" Command="{Binding Calculate}"/>
+        <KeyBinding Key="Up" CommandParameter="{x:Static local:OperationType.ENTER}" Command="{Binding Calculate}"/>
+        <KeyBinding Key="Enter" CommandParameter="{x:Static local:OperationType.ENTER}" Command="{Binding Calculate}"/>
+        <KeyBinding Key="Divide" CommandParameter="{x:Static local:OperationType.DIV}" Command="{Binding Calculate}"/>
+        <KeyBinding Key="Multiply" CommandParameter="{x:Static local:OperationType.MUL}" Command="{Binding Calculate}"/>
+        <KeyBinding Key="Subtract" CommandParameter="{x:Static local:OperationType.SUB}" Command="{Binding Calculate}"/>
+        <KeyBinding Key="Add" CommandParameter="{x:Static local:OperationType.ADD}" Command="{Binding Calculate}"/>
+        <KeyBinding Key="Right" Command="{Binding ChangeModeNext}"/>
+        <KeyBinding Key="Space" Command="{Binding ChangeModeNext}"/>
+        <KeyBinding Key="Left" Command="{Binding ChangeModePrev}"/>
+    </Window.InputBindings>
+    <Grid VerticalAlignment="Stretch"  HorizontalAlignment="Stretch" >
         <Grid.Resources>
             <local:EnumBooleanConverter x:Key="enumBooleanConverter" />
         </Grid.Resources>
@@ -19,9 +45,18 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" Background="Yellow" HorizontalAlignment="Stretch">
+        <Grid Grid.Row="1" Grid.RowSpan="3" Grid.Column="0"  HorizontalAlignment="Stretch" Margin="10">
+            <ListView HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" ItemsSource="{Binding Items,Mode=OneWay}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="L" Width="40" DisplayMemberBinding="{Binding Key}" />
+                        <GridViewColumn Width="auto"  DisplayMemberBinding="{Binding Value}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
         </Grid>
-        <Grid Grid.Row="1"  Grid.Column="2" Background="Red" HorizontalAlignment="Stretch">
+        <Grid Grid.Row="1"  Grid.Column="2"  HorizontalAlignment="Stretch" Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="25"/>
                 <ColumnDefinition Width="*"/>
@@ -41,12 +76,12 @@
             <TextBox Text="{Binding L2, Mode=OneWay}" Grid.Column="1" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Right" VerticalContentAlignment="Center" IsReadOnly="True" />
             <TextBox Text="{Binding L1, Mode=OneWay}" Grid.Column="1" Grid.Row="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Right" VerticalContentAlignment="Center" IsReadOnly="True"/>
         </Grid>
-        <Grid Grid.Row="2"  Grid.Column="2" Background="blue" HorizontalAlignment="Stretch">
-            <RadioButton HorizontalAlignment="Left" VerticalAlignment="Center" IsChecked="{Binding CalculationMode,ConverterParameter=Number,Converter={StaticResource enumBooleanConverter}}">Number</RadioButton>
-            <RadioButton HorizontalAlignment="Center" VerticalAlignment="Center"  IsChecked="{Binding CalculationMode,ConverterParameter=Date,Converter={StaticResource enumBooleanConverter}}">Date</RadioButton>
-            <RadioButton HorizontalAlignment="Right" VerticalAlignment="Center" IsChecked="{Binding CalculationMode,ConverterParameter=Time,Converter={StaticResource enumBooleanConverter}}">Time</RadioButton>
+        <Grid Grid.Row="2"  Grid.Column="2" HorizontalAlignment="Stretch" Margin="10,0,10,0">
+            <local:MyRadioButton GroupName="mode" HorizontalAlignment="Left" VerticalAlignment="Center" IsChecked="{Binding Path=CalculationMode,ConverterParameter=Number,Converter={StaticResource enumBooleanConverter}}">Liczby</local:MyRadioButton>
+            <local:MyRadioButton GroupName="mode" HorizontalAlignment="Center" VerticalAlignment="Center"  IsChecked="{Binding Path=CalculationMode,ConverterParameter=Date,Converter={StaticResource enumBooleanConverter}}">Data</local:MyRadioButton>
+            <local:MyRadioButton GroupName="mode" HorizontalAlignment="Right" VerticalAlignment="Center" IsChecked="{Binding Path=CalculationMode,ConverterParameter=Time,Converter={StaticResource enumBooleanConverter}}">Czas</local:MyRadioButton>
         </Grid>
-        <Grid Grid.Row="3"  Grid.Column="2" Background="Green">
+        <Grid Grid.Row="3"  Grid.Column="2" Margin="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" MinWidth="30"/>
                 <ColumnDefinition Width="*" MinWidth="30"/>
@@ -104,7 +139,8 @@
             <MenuItem Header="_Help" />
         </Menu>
         <StatusBar Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2"  Grid.RowSpan="2">
-            <Label Content="{Binding Memory}"/>
+            <Label Content="{Binding Memory}" />
+            <Label Content="{Binding Message}"/>
         </StatusBar>
     </Grid>
 </Window>
