@@ -59,6 +59,10 @@ namespace RPN
             }
         }
 
+        public ICommand ShowAboutDialog{
+            get {return new SimpleAction(() => ShowDialog(), true);}
+        }
+
         private void ChangeModeAction(int direction)
         {
             if (this.CalculationMode == CalculationMode.Number)
@@ -109,7 +113,6 @@ namespace RPN
             }
         }
 
- 
         public CalculationMode CalculationMode
         {
             get { return calculationMode; }
@@ -124,7 +127,10 @@ namespace RPN
         #endregion
 
         #region Private methods
-
+        public void ShowDialog(){
+            About dialog = new About();
+            dialog.Show();
+        }
 
         #endregion
 

@@ -56,6 +56,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MyRadioButton.cs" />
     <Compile Include="SimpleAction.cs" />
     <Compile Include="EnumBooleanConverter.cs" />
@@ -84,6 +87,10 @@
     <Compile Include="Operations\Enter.cs" />
     <Compile Include="Operations\Erase.cs" />
     <Compile Include="ViewModelCalculator.cs" />
+    <Page Include="About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

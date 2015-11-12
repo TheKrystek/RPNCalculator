@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="RPN.MainWindow"
     xmlns:local="clr-namespace:RPN"
-    Title="MainWindow" Height="500" MinHeight="500" Width="400"  MinWidth="400" HorizontalAlignment="Stretch">
+    Title="MainWindow" Height="500" MinHeight="500" Width="400"  MinWidth="600"  MaxHeight="800" MaxWidth="800" HorizontalAlignment="Stretch">
     <Window.InputBindings>
         <KeyBinding Key="NumPad0" CommandParameter="0" Command="{Binding Calculate}"/>
         <KeyBinding Key="NumPad1" CommandParameter="1" Command="{Binding Calculate}"/>
@@ -35,7 +35,7 @@
             <local:EnumBooleanConverter x:Key="enumBooleanConverter" />
         </Grid.Resources>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" MinWidth="200"/>
+            <ColumnDefinition Width="*" MinWidth="300"/>
             <ColumnDefinition MinWidth="150"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -132,11 +132,7 @@
             <Button Content="+" Grid.Column="4" Grid.Row="4" CommandParameter="{x:Static local:OperationType.ADD}" Command="{Binding Calculate}"/>
         </Grid>
         <Menu Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" IsMainMenu="True">
-            <MenuItem Header="_File" />
-            <MenuItem Header="_Edit" />
-            <MenuItem Header="_View" />
-            <MenuItem Header="_Window" />
-            <MenuItem Header="_Help" />
+            <MenuItem Header="_About" Command="{Binding ShowAboutDialog}"/>
         </Menu>
         <StatusBar Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2"  Grid.RowSpan="2">
             <Label Content="{Binding Memory}" />
